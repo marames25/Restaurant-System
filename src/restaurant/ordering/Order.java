@@ -9,8 +9,12 @@ public abstract class Order {
 
     protected List<FoodItem> items = new ArrayList<>();
     protected double tax;
+    protected String type;
 
-    public Order(double tax) {this.tax = tax;}
+    public Order(double tax, String type) {
+        this.tax = tax;
+        this.type = type;
+    }
 
     public void addItem(FoodItem item) {
         if (item != null) items.add(item);
@@ -30,5 +34,9 @@ public abstract class Order {
 
     public double getTax() {
         return this.tax;
+    }
+
+    public String getType() {
+        return this.type;
     }
 }

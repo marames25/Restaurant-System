@@ -3,6 +3,6 @@ package restaurant.ordering;
 public class Delivery extends Order {
     
     public Delivery(){
-        super(35);
+        super(35, "Delivery");
     }
 }
