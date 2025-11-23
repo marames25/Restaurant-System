@@ -43,14 +43,6 @@ public class ItemsFactory {
         inventory.put("ML-5-2", new Meal("ML-5-2", "2 Chicken Pieces + Rice", 210.0, "Non-Vegetarian"));
         inventory.put("ML-6-v", new Meal("ML-6-v", "Vegetarian Combo Meal", 180.0, "Vegetarian"));
         inventory.put("ML-7-b", new Meal("ML-7-b", "Beef Bowl Meal", 260.0, "Non-Vegetarian"));
-        
-        // ---------------- DRINKS ----------------
-        inventory.put("DR-1-c", new Drink("DR-1-c", "Coca Cola Can", 25.0, "Drink"));
-        inventory.put("DR-2-p", new Drink("DR-2-p", "Pepsi Can", 25.0, "Drink"));
-        inventory.put("DR-3-s", new Drink("DR-3-s", "Sprite Can", 25.0, "Drink"));
-        inventory.put("DR-4-w", new Drink("DR-4-w", "Water Bottle", 15.0, "Drink"));
-        inventory.put("DR-5-j", new Drink("DR-5-j", "Fresh Orange Juice", 45.0, "Drink"));
-        inventory.put("DR-6-j", new Drink("DR-6-j", "Fresh Mango Juice", 50.0, "Drink"));
 
         // ---------------- KIDS ITEMS ----------------
         inventory.put("KD-1-b", new Meal("KD-1-b", "Kids Beef Slider Meal", 120.0, "Kids"));

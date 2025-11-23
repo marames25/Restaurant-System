@@ -16,7 +16,7 @@ public class LeafItem extends MenuComponent {
 
     @Override
     public void display() { 
-        System.out.println(item.getId() + " " + item.getDescription() + " : " +  item.getPrice() + "EGP");
+        System.out.println(item.getId() + ") " + item.getDescription() + " : " +  item.getPrice() + "EGP");
     }
 
     @Override

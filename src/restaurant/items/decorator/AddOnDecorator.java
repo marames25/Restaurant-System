@@ -16,6 +16,8 @@ public abstract class AddOnDecorator extends FoodItem {
 
     @Override
     public String getId() {
+        if (foodItem == null) return this.id;
+
         return foodItem.getId();
     }
 

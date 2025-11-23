@@ -15,6 +15,7 @@ public class Menu extends MenuComponent {
 
     @Override
     public void display() { 
+        System.out.println("\n*****************\n");
         System.out.println(type + " menu: ");
 
         for (MenuComponent mc : components) {
