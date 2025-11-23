@@ -11,13 +11,14 @@ public class PaymentProcessor {
     private PaymentMethod paymentMethod;
     private Order order;
     private DiscountFactory dFactory;
-    double total;
+    double total, tax;
 
     public PaymentProcessor(PaymentMethod paymentMethod, Order order) {
         this.paymentMethod = paymentMethod;
         this.order = order;
         this.dFactory = new DiscountFactory();
         this.total = 0;
+        this.tax = 0;
     }
 
     public void checkout() {
@@ -27,7 +28,7 @@ public class PaymentProcessor {
             subtotal += discount.apply(item.getPrice());
         }
 
-        double tax = order.getTax();
+        this.tax = order.getTax();
         if (tax < 1) // that means it is a percentage
             tax *= subtotal;
 
@@ -42,6 +43,7 @@ public class PaymentProcessor {
             double discounted = discount.apply(item.getPrice());
             System.out.println("After discount: " + discounted + " EGP");
         }
+        System.out.println(order.getType() + " " + this.tax);
         System.out.println("Total: " + this.total);
     }
     
