@@ -2,7 +2,7 @@ package restaurant.discount;
 
 public class DiscountFactory {
 
-    public static Discount getDiscount(String category) {
+    public Discount getDiscount(String category) {
         if (category == null || category.isEmpty())
             return null;
 
@@ -14,7 +14,7 @@ public class DiscountFactory {
         if (category.contains("burger"))
             return new BurgerDiscount();
 
-        if (category.contains("meat"))
+        if (category.contains("meal"))
             return new MeatDiscount();
 
         
