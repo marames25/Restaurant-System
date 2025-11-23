@@ -1,25 +1,28 @@
-package restaurant.payment;
+package restaurant.paymentProcessor;
 
 import restaurant.payment.methods.PaymentMethod;
-import restaurant.discount.Discount;
+import restaurant.discount.DiscountFactory;
 import restaurant.ordering.Order;
+import restaurant.items.FoodItem;
 
 public class PaymentProcessor {
 
     private PaymentMethod paymentMethod;
-    private Discount discount; // may be null => no discount
     private Order order;
 
-    public PaymentProcessor(PaymentMethod paymentMethod, Discount discount, Order order) {
+    public PaymentProcessor(PaymentMethod paymentMethod, Order order) {
         this.paymentMethod = paymentMethod;
-        this.discount = discount;
         this.order = order;
     }
 
     public void checkout() {
-        double subtotal = order.getTotalPrice();
-        double discounted = Optional.ofNullable(discount).map(d -> d.apply(subtotal)).orElse(subtotal);
-        double total = discounted + order.getTax();
+        double subtotal = 0;
+        for (FoodItem item : order.getItems()) {
+            double discountedPrice = DiscountFactory.applyDiscount(item);
+            subtotal += discountedPrice;
+        }
+        double tax = order.getTax();
+        double total = subtotal + tax;
         paymentMethod.pay(total);
     }
 
@@ -28,9 +31,6 @@ public class PaymentProcessor {
         this.paymentMethod = paymentMethod;
     }
 
-    public void setDiscount(Discount discount) {
-        this.discount = discount;
-    }
 
     public void setOrder(Order order) {
         this.order = order;
