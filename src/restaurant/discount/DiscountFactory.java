@@ -8,13 +8,13 @@ public class DiscountFactory {
 
         category = category.toLowerCase();
 
-        if (category.contains("Pizza"))
+        if (category.contains("pizza"))
             return new PizzaDiscount();
 
-        if (category.contains("Burger"))
+        if (category.contains("burger"))
             return new BurgerDiscount();
 
-        if (category.contains("Meal"))
+        if (category.contains("meal"))
             return new MeatDiscount();
 
         

@@ -78,7 +78,6 @@ public class MenuHandler {
              result[i] = ordersList.get(i);
          }
      
-        scanner.close();
          return result;
     }
 
