@@ -1,7 +1,7 @@
 package restaurant.items.decorator;
 
-import restaurant.items.FoodItem;
-
 public class Cheese extends AddOnDecorator {
-    public Cheese(FoodItem item) { super(item); }
+    public Cheese(double price) {
+        super("ADD-CHS", "Cheese", price, "AddOn", "Cheese");
+    }
 }
