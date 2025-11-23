@@ -46,10 +46,9 @@ public class MenuHandler {
         }
     }
     
-    public String[][] takeUserOrders() {
+    public String[][] takeUserOrders(Scanner scanner) {
         mainMenu.display();
-         Scanner scanner = new Scanner(System.in);
-         
+
          System.out.println("\nPlease enter your orders.");
          System.out.println("Format: MAIN_ITEM ADDON1 ADDON2 ...");
          System.out.println("Type 'DONE' to finish.\n");
@@ -59,16 +58,16 @@ public class MenuHandler {
          while (true) {
              System.out.print("Order > ");
              String line = scanner.nextLine().trim();
-         
+        
              if (line.equalsIgnoreCase("DONE")) break;
              if (line.isEmpty()) continue;
-         
+        
              // split items by space
              String[] entry = line.split("\\s+");
-         
+        
              // must have at least 1 item (the main item)
              if (entry.length == 0) continue;
-         
+        
              ordersList.add(entry);
          }
      
@@ -77,8 +76,8 @@ public class MenuHandler {
          for (int i = 0; i < ordersList.size(); i++) {
              result[i] = ordersList.get(i);
          }
-     
-         return result;
+    
+        return result;
     }
 
 }
