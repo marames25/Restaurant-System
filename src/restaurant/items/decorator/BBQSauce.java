@@ -1,7 +1,7 @@
 package restaurant.items.decorator;
 
-import restaurant.items.FoodItem;
-
 public class BBQSauce extends AddOnDecorator {
-    public BBQSauce(FoodItem item) { super(item); }
+    public BBQSauce(double price) {
+        super("ADD-BBQ", "BBQ Sauce", price, "AddOn", "Sauce");
+    }
 }
