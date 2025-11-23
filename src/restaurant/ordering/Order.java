@@ -8,6 +8,9 @@ import java.util.List;
 public abstract class Order {
 
     protected List<FoodItem> items = new ArrayList<>();
+    protected double tax;
+
+    public Order(double tax) {this.tax = tax;}
 
     public void addItem(FoodItem item) {
         if (item != null) items.add(item);
@@ -25,9 +28,7 @@ public abstract class Order {
         return items.size();
     }
 
-    public double getTotalPrice() {
-        return items.stream().mapToDouble(FoodItem::getPrice).sum();
+    public double getTax() {
+        return this.tax;
     }
-
-    public abstract double getTax();
 }

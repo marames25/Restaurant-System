@@ -1,6 +1,7 @@
 package restaurant.ordering.factory;
 
 import restaurant.items.FoodItem;
+import restaurant.items.decorator.AddOnDecorator;
 import restaurant.items.factory.ItemsFactory;
 import restaurant.ordering.Order;
 import restaurant.ordering.DineIn;
@@ -8,14 +9,12 @@ import restaurant.ordering.Delivery;
 import restaurant.ordering.Takeaway;
 import restaurant.observer.Context;
 
-public class OrderPlacer {
+public class OrderPlacer extends Context{
 
     private ItemsFactory itemsFactory;
-    private final Context context;
 
-    public OrderPlacer(ItemsFactory itemsFactory, Context context) {
+    public OrderPlacer(ItemsFactory itemsFactory) {
         this.itemsFactory = itemsFactory;
-        this.context = context;
     }
 
      // Place order by item id and order type string: "dine in"|"delivery"|"takeaway"
@@ -23,18 +22,60 @@ public class OrderPlacer {
 
 
 
-    public Order placeOrder(String itemId, String OrderType) {
-        FoodItem foodItem = itemsFactory.getItem(itemId);
+    public Order placeOrder(String[][] items, String orderType) {
+        // Determine order type
         Order order;
-        if("Delivery".equals(OrderType)) order = new Delivery();
-        else if("Takeaway".equals(OrderType)) order = new Takeaway();
-        else order = new DineIn();
+        if ("Delivery".equalsIgnoreCase(orderType)) {
+            order = new Delivery();
+        } else if ("Takeaway".equalsIgnoreCase(orderType)) {
+            order = new Takeaway();
+        } else {
+            order = new DineIn();
+        }
 
-        if(item != null) order.addItem(foodItem);
+        // Build each ordered item
+        for (String[] row : items) {
+            if (row.length == 0) continue;  
 
-        // notify observers about the newly placed order
-        context.notifyObservers(order);
+            // 1) Main item
+            String baseId = row[0];
+            FoodItem item = itemsFactory.getItem(baseId);
+
+            if (item == null) {
+                System.out.println("[WARN] Unknown item id: " + baseId);
+                continue;
+            }
+
+            // 2) Apply decorators (add-ons)
+            FoodItem decorated = item;
+
+            for (int i = 1; i < row.length; i++) {
+                String addId = row[i];
+
+                FoodItem addon = itemsFactory.getItem(addId);
+
+                if (addon == null) {
+                    System.out.println("[WARN] Unknown add-on id: " + addId);
+                    continue;
+                }
+
+                // Each add-on is a decorator so attach the previous chain
+                if (addon instanceof AddOnDecorator decor) {
+                    decor.setFoodItem(decorated);
+                    decorated = decor;
+                } else {
+                    System.out.println("[WARN] " + addId + " is not an add-on decorator.");
+                }
+            }
+
+            // Add final decorated food item to order
+            order.addItem(decorated);
+        }
+
+        // Notify observers
+        
+
         return order;
+    }   
 
-    }
 }

@@ -10,6 +10,6 @@ public class Waiter implements Observer {
     }
     @Override
     public void update(Order order) {
-        System.out.println("Waiter " + this.name + " received order. Order total: " + order.getTotalPrice());
+        System.out.println("Waiter " + this.name + " received order.");
     }
 }
